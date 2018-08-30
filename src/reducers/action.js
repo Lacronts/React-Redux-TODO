@@ -2,17 +2,12 @@ import { CREATE, DELETE, TOOGLE, SAVE, EDIT } from '../actions/Actions'
 
 const initialState = []
 
+let maxId = 0;
 export function CEDReducer(state = initialState, action) {
-  let maxId = state.reduce((accumulator, currenValue)=> {
-    if  (accumulator > currenValue.id){
-      return accumulator
-    } else {
-      return currenValue.id
-    }
-  },0)
+
   switch (action.type) {
     case CREATE:
-      return [...state, {id: ++maxId, task:action.payload, isDone:false, isEditing: false}]
+      return [...state, {id: maxId++, task:action.payload, isDone:false, isEditing: false}]
     case SAVE:
       return state.map((item) => {
       if (item.id === parseInt(action.payload.id,10)) {
