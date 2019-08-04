@@ -1,15 +1,20 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDom from 'react-dom';
 import { Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { history } from 'helpers/history';
 import { App } from './App';
 
+import { store } from './redux/store';
+
 const target = document.getElementById('root');
 if (target) {
-  render(
-    <Router history={history}>
-      <App />
-    </Router>,
+  ReactDom.render(
+    <Provider store={store}>
+      <Router history={history}>
+        <App />
+      </Router>
+    </Provider>,
     target
   );
 }
