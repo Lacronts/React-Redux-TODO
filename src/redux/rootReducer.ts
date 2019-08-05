@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { signInProcess } from './reducers/SignIn';
+import { auth } from './reducers/auth';
 
 export const rootReducer = combineReducers({
-  signInProcess,
+  auth,
 });

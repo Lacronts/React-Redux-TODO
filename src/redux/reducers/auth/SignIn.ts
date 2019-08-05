@@ -1,4 +1,4 @@
-import { SIGN_IN_FAIL, SIGN_IN_FINISH, SIGN_IN_START } from '../actionTypes';
+import { SIGN_IN_FAIL, SIGN_IN_FINISH, SIGN_IN_START } from '../../actionTypes';
 
 const initialState = {
   inProcess: false,
@@ -11,6 +11,7 @@ export const signInProcess = (state = initialState, action: any) => {
       return {
         ...state,
         inProcess: true,
+        error: '',
       };
     case SIGN_IN_FAIL:
       return {

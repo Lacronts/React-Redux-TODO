@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { ProtectedRoute } from 'components/ProtectedRoute';
 
 import { SignInContainer as SignInPage } from 'containers/SignInContainer';
-import { SignUp as SignUpPage } from 'Pages/SIgnUp';
+import { SignUpContainer as SignUpPage } from 'containers/SignUpContainer';
 import { Todo as TodoPage } from 'Pages/Todo';
 
 export const App = () => {

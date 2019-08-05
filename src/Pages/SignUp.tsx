@@ -31,14 +31,17 @@ const useStyles = (theme: Theme) =>
     },
   });
 
-interface Props extends WithStyles<typeof useStyles> {}
+interface Props extends WithStyles<typeof useStyles> {
+  signUpProcess: any;
+  signUpStart(name: string, email: string, password: string): void;
+}
 
-const SignUpComponent = ({ classes }: Props) => {
+const SignUpComponent = ({ classes, signUpStart, signUpProcess }: Props) => {
   const [formData, setFormData] = useState({ email: '', password: '', name: '' });
 
   const trySignUp = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(formData);
+    signUpStart(formData.name, formData.email, formData.password);
   };
 
   const handleChangeInput = ({
@@ -46,6 +49,8 @@ const SignUpComponent = ({ classes }: Props) => {
   }: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [name]: value });
   };
+
+  const errors = signUpProcess.error && signUpProcess.error.details;
 
   return (
     <Container maxWidth='xs'>
@@ -68,6 +73,7 @@ const SignUpComponent = ({ classes }: Props) => {
             autoComplete='firstName'
             value={formData.name}
             onChange={handleChangeInput}
+            error={!!errors.name}
           />
           <TextField
             variant='outlined'
@@ -79,6 +85,7 @@ const SignUpComponent = ({ classes }: Props) => {
             autoComplete='email'
             value={formData.email}
             onChange={handleChangeInput}
+            error={!!errors.email}
           />
           <TextField
             variant='outlined'
@@ -91,7 +98,9 @@ const SignUpComponent = ({ classes }: Props) => {
             autoComplete='current-password'
             value={formData.password}
             onChange={handleChangeInput}
+            error={!!errors.password}
           />
+
           <Button
             type='submit'
             fullWidth
@@ -100,7 +109,7 @@ const SignUpComponent = ({ classes }: Props) => {
             className={classes.submit}
             onClick={trySignUp}
           >
-            Sign In
+            Sign Up
           </Button>
           <Grid container>
             <Grid item xs />

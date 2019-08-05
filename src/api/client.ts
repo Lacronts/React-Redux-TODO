@@ -7,18 +7,18 @@ type ApiVersions = {
 };
 
 export const API_VERSIONS: ApiVersions = {
-  v1: 'v1'
+  v1: 'v1',
 };
 
 const API_BASE_PATHS = {
-  [API_VERSIONS.v1]: `${SERVER_URL}/api/v1`
+  [API_VERSIONS.v1]: `${SERVER_URL}/api/v1`,
 };
 
 export const getClient = () => {
   let headers = {
     'Cache-Control': 'no-cache',
     'Content-Type': 'application/json',
-    'x-access-token': ''
+    'x-access-token': '',
   };
 
   const token = localStorage.getItem('token');
@@ -29,7 +29,7 @@ export const getClient = () => {
 
   const instance = axios.create({
     headers,
-    baseURL: API_BASE_PATHS[API_VERSIONS.v1] || '/'
+    baseURL: API_BASE_PATHS[API_VERSIONS.v1] || '/',
   });
 
   instance.interceptors.response.use(
@@ -40,8 +40,8 @@ export const getClient = () => {
       return Promise.reject(response);
     },
     error => {
-      if (error.response.status === 500) {
-        console.error('INTERNAL SERVER ERROR', error.response);
+      if (error.message === 'Network Error') {
+        error.response = { data: { error: 'Connection Refused!' } };
       } else if (error.response.status === 401) {
         resetToken();
       }

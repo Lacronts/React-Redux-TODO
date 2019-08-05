@@ -33,7 +33,7 @@ const useStyles = (theme: Theme) =>
 
 interface Props extends WithStyles<typeof useStyles> {
   signInProcess: any;
-  signInStart(): void;
+  signInStart(email: string, password: string): void;
 }
 
 const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
@@ -41,7 +41,7 @@ const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
 
   const trySignIn = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    signInStart();
+    signInStart(formData.email, formData.password);
   };
 
   const handleChangeInput = ({
@@ -84,6 +84,9 @@ const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
             value={formData.password}
             onChange={handleChangeInput}
           />
+          <Typography color='error' align='center'>
+            {signInProcess.error}
+          </Typography>
           <Button
             type='submit'
             fullWidth
