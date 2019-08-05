@@ -31,17 +31,14 @@ const useStyles = (theme: Theme) =>
     },
   });
 
-interface Props extends WithStyles<typeof useStyles> {
-  signInProcess: any;
-  signInStart(): void;
-}
+interface Props extends WithStyles<typeof useStyles> {}
 
-const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
+const SignUpComponent = ({ classes }: Props) => {
+  const [formData, setFormData] = useState({ email: '', password: '', name: '' });
 
-  const trySignIn = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const trySignUp = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    signInStart();
+    console.log(formData);
   };
 
   const handleChangeInput = ({
@@ -61,6 +58,18 @@ const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
+            autoFocus
+            variant='outlined'
+            margin='normal'
+            required
+            fullWidth
+            name='name'
+            label='Name'
+            autoComplete='firstName'
+            value={formData.name}
+            onChange={handleChangeInput}
+          />
+          <TextField
             variant='outlined'
             margin='normal'
             required
@@ -68,7 +77,6 @@ const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
             label='Email Address'
             name='email'
             autoComplete='email'
-            autoFocus
             value={formData.email}
             onChange={handleChangeInput}
           />
@@ -90,15 +98,15 @@ const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
             variant='contained'
             color='primary'
             className={classes.submit}
-            onClick={trySignIn}
+            onClick={trySignUp}
           >
             Sign In
           </Button>
           <Grid container>
             <Grid item xs />
             <Grid item>
-              <Link to='/sign-up/' variant='body2' component={RouterLink}>
-                {"Don't have an account? Sign Up"}
+              <Link to='/sign-in/' variant='body2' component={RouterLink}>
+                {'Have an account? Sign In'}
               </Link>
             </Grid>
           </Grid>
@@ -108,4 +116,4 @@ const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
   );
 };
 
-export const SignIn = withStyles(useStyles)(SignInComponent);
+export const SignUp = withStyles(useStyles)(SignUpComponent);
