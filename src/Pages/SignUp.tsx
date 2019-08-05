@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Container from '@material-ui/core/Container';
@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { WithStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import { isAuthenticated } from 'helpers/auth';
 
 const useStyles = (theme: Theme) =>
   createStyles({
@@ -29,6 +32,20 @@ const useStyles = (theme: Theme) =>
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    message: {
+      color: '#64dd17',
+    },
+    wrapper: {
+      margin: theme.spacing(1),
+      position: 'relative',
+    },
+    progress: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      marginLeft: '-12px',
+      marginTop: '-6px',
+    },
   });
 
 interface Props extends WithStyles<typeof useStyles> {
@@ -37,6 +54,10 @@ interface Props extends WithStyles<typeof useStyles> {
 }
 
 const SignUpComponent = ({ classes, signUpStart, signUpProcess }: Props) => {
+  if (isAuthenticated()) {
+    return <Redirect to='/' />;
+  }
+
   const [formData, setFormData] = useState({ email: '', password: '', name: '' });
 
   const trySignUp = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -74,7 +95,9 @@ const SignUpComponent = ({ classes, signUpStart, signUpProcess }: Props) => {
             value={formData.name}
             onChange={handleChangeInput}
             error={!!errors.name}
+            helperText={errors.name}
           />
+
           <TextField
             variant='outlined'
             margin='normal'
@@ -86,7 +109,9 @@ const SignUpComponent = ({ classes, signUpStart, signUpProcess }: Props) => {
             value={formData.email}
             onChange={handleChangeInput}
             error={!!errors.email}
+            helperText={errors.email}
           />
+
           <TextField
             variant='outlined'
             margin='normal'
@@ -99,18 +124,27 @@ const SignUpComponent = ({ classes, signUpStart, signUpProcess }: Props) => {
             value={formData.password}
             onChange={handleChangeInput}
             error={!!errors.password}
+            helperText={errors.password}
           />
-
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-            onClick={trySignUp}
-          >
-            Sign Up
-          </Button>
+          <Typography className={classes.message} align='center'>
+            {signUpProcess.message}
+          </Typography>
+          <div className={classes.wrapper}>
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='primary'
+              className={classes.submit}
+              onClick={trySignUp}
+              disabled={signUpProcess.inProcess}
+            >
+              Sign Up
+            </Button>
+            {signUpProcess.inProcess && (
+              <CircularProgress size={24} className={classes.progress} />
+            )}
+          </div>
           <Grid container>
             <Grid item xs />
             <Grid item>

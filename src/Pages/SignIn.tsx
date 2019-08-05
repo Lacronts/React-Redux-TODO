@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Container from '@material-ui/core/Container';
@@ -7,8 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { WithStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
+
+import { isAuthenticated } from 'helpers/auth';
 
 const useStyles = (theme: Theme) =>
   createStyles({
@@ -29,6 +32,17 @@ const useStyles = (theme: Theme) =>
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    wrapper: {
+      margin: theme.spacing(1),
+      position: 'relative',
+    },
+    progress: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      marginLeft: '-12px',
+      marginTop: '-6px',
+    },
   });
 
 interface Props extends WithStyles<typeof useStyles> {
@@ -37,6 +51,10 @@ interface Props extends WithStyles<typeof useStyles> {
 }
 
 const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
+  if (isAuthenticated()) {
+    return <Redirect to='/' />;
+  }
+
   const [formData, setFormData] = useState({ email: '', password: '' });
 
   const trySignIn = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -87,16 +105,22 @@ const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
           <Typography color='error' align='center'>
             {signInProcess.error}
           </Typography>
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-            onClick={trySignIn}
-          >
-            Sign In
-          </Button>
+          <div className={classes.wrapper}>
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='primary'
+              className={classes.submit}
+              onClick={trySignIn}
+              disabled={signInProcess.inProcess}
+            >
+              Sign In
+            </Button>
+            {signInProcess.inProcess && (
+              <CircularProgress size={24} className={classes.progress} />
+            )}
+          </div>
           <Grid container>
             <Grid item xs />
             <Grid item>

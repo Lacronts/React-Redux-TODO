@@ -34,6 +34,7 @@ export const signUpFail = (error: string) => ({
   error,
 });
 
-export const signUpFinish = () => ({
+export const signUpFinish = (successMessage: string) => ({
   type: SIGN_UP_FINISH,
+  successMessage,
 });
