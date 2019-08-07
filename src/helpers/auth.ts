@@ -3,6 +3,8 @@ export function isAuthenticated() {
 }
 
 export function resetToken() {
-  localStorage.removeItem('token');
-  window.location.reload();
+  localStorage.clear();
+  setTimeout(function() {
+    window.location.reload(true);
+  }, 100);
 }

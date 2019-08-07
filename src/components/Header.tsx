@@ -9,11 +9,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
+import { resetToken } from 'helpers/auth';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1,
-    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -35,52 +34,50 @@ export const Header = () => {
   const handleClose = () => setAnchorEl(null);
 
   return (
-    <header>
-      <AppBar>
-        <Toolbar>
-          <IconButton
-            edge='start'
-            className={classes.menuButton}
-            color='inherit'
-            aria-label='menu'
-          >
-            <MenuIcon open={false} />
-          </IconButton>
-          <Typography variant='h6' className={classes.title}>
-            TODO list
-          </Typography>
+    <AppBar position='relative'>
+      <Toolbar>
+        <IconButton
+          edge='start'
+          className={classes.menuButton}
+          color='inherit'
+          aria-label='menu'
+        >
+          <MenuIcon open={false} />
+        </IconButton>
+        <Typography variant='h6' className={classes.title}>
+          TODO list
+        </Typography>
 
-          <div>
-            <IconButton
-              aria-label='account of current user'
-              aria-controls='menu-appbar'
-              aria-haspopup='true'
-              color='inherit'
-              onClick={handleOpen}
-            >
-              <AccountCircle />
-            </IconButton>
-            <Menu
-              anchorEl={anchorEl}
-              id='menu-appbar'
-              keepMounted
-              open={open}
-              onClose={handleClose}
-              getContentAnchorEl={null}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
-            >
-              <MenuItem>Logout</MenuItem>
-            </Menu>
-          </div>
-        </Toolbar>
-      </AppBar>
-    </header>
+        <div>
+          <IconButton
+            aria-label='account of current user'
+            aria-controls='menu-appbar'
+            aria-haspopup='true'
+            color='inherit'
+            onClick={handleOpen}
+          >
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            id='menu-appbar'
+            keepMounted
+            open={open}
+            onClose={handleClose}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+          >
+            <MenuItem onClick={resetToken}>Logout</MenuItem>
+          </Menu>
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 };

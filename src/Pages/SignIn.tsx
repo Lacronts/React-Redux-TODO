@@ -89,6 +89,7 @@ const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
             autoFocus
             value={formData.email}
             onChange={handleChangeInput}
+            error={!!signInProcess.error}
           />
           <TextField
             variant='outlined'
@@ -101,6 +102,7 @@ const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
             autoComplete='current-password'
             value={formData.password}
             onChange={handleChangeInput}
+            error={!!signInProcess.error}
           />
           <Typography color='error' align='center'>
             {signInProcess.error}

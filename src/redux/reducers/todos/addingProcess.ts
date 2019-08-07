@@ -1,41 +1,32 @@
-import {
-  SIGN_IN_FAIL,
-  SIGN_IN_FINISH,
-  SIGN_IN_START,
-  CLEAR_ALERTS,
-} from '../../actionTypes';
+import { ADD_ITEM_FAIL, ADD_ITEM_FINISH, ADD_ITEM_START } from '../../actionTypes';
 
-const initialState = {
+const inititalState = {
   inProcess: false,
   error: '',
 };
 
-export const signInProcess = (state = initialState, action: any) => {
+export const addingProcess = (state = inititalState, action: any) => {
   switch (action.type) {
-    case SIGN_IN_START:
+    case ADD_ITEM_START:
       return {
         ...state,
         inProcess: true,
         error: '',
       };
-    case SIGN_IN_FAIL:
+
+    case ADD_ITEM_FAIL:
       return {
         ...state,
         inProcess: false,
         error: action.error,
       };
-    case SIGN_IN_FINISH: {
+
+    case ADD_ITEM_FINISH:
       return {
         ...state,
         inProcess: false,
-      };
-    }
-    case CLEAR_ALERTS: {
-      return {
-        ...state,
         error: '',
       };
-    }
     default:
       return state;
   }

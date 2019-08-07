@@ -5,6 +5,7 @@ import {
   SIGN_UP_FAIL,
   SIGN_UP_FINISH,
   SIGN_UP_START,
+  CLEAR_ALERTS,
 } from '../actionTypes';
 
 export const signInStart = (email: string, password: string) => ({
@@ -37,4 +38,8 @@ export const signUpFail = (error: string) => ({
 export const signUpFinish = (successMessage: string) => ({
   type: SIGN_UP_FINISH,
   successMessage,
+});
+
+export const clearAlerts = () => ({
+  type: CLEAR_ALERTS,
 });

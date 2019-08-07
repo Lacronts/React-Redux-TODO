@@ -1,4 +1,9 @@
-import { SIGN_UP_FAIL, SIGN_UP_FINISH, SIGN_UP_START } from '../../actionTypes';
+import {
+  SIGN_UP_FAIL,
+  SIGN_UP_FINISH,
+  SIGN_UP_START,
+  CLEAR_ALERTS,
+} from '../../actionTypes';
 
 const initialState = {
   inProcess: false,
@@ -26,6 +31,12 @@ export const signUpProcess = (state = initialState, action: any) => {
         ...state,
         inProcess: false,
         message: action.successMessage,
+      };
+    }
+    case CLEAR_ALERTS: {
+      return {
+        ...state,
+        error: '',
       };
     }
     default:
