@@ -5,38 +5,40 @@ import {
   CLEAR_ALERTS,
 } from '../../actionTypes';
 
-const initialState = {
+import { SignUpProcess, Actions } from 'types';
+
+const initialState: SignUpProcess = {
   inProcess: false,
-  error: '',
+  error: null,
   message: '',
 };
 
-export const signUpProcess = (state = initialState, action: any) => {
+export const signUpProcess = (state = initialState, action: Actions): SignUpProcess => {
   switch (action.type) {
     case SIGN_UP_START:
       return {
         ...state,
         inProcess: true,
-        error: '',
+        error: null,
         message: '',
       };
     case SIGN_UP_FAIL:
       return {
         ...state,
         inProcess: false,
-        error: action.error,
+        error: action.error || null,
       };
     case SIGN_UP_FINISH: {
       return {
         ...state,
         inProcess: false,
-        message: action.successMessage,
+        message: action.successMessage || '',
       };
     }
     case CLEAR_ALERTS: {
       return {
         ...state,
-        error: '',
+        error: null,
       };
     }
     default:

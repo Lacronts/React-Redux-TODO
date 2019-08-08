@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
+    profile: {
+      display: 'flex',
+      alignItems: 'center',
+    },
   })
 );
 
@@ -32,6 +36,7 @@ export const Header = () => {
   };
 
   const handleClose = () => setAnchorEl(null);
+  const userData = JSON.parse(localStorage.getItem('user') || '');
 
   return (
     <AppBar position='relative'>
@@ -48,7 +53,8 @@ export const Header = () => {
           TODO list
         </Typography>
 
-        <div>
+        <div className={classes.profile}>
+          <Typography>{userData.name}</Typography>
           <IconButton
             aria-label='account of current user'
             aria-controls='menu-appbar'

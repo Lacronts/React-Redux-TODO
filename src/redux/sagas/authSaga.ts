@@ -9,9 +9,11 @@ import {
   signUpFinish,
 } from '../actions/authActions';
 
-function* signInSaga(action: any): any {
+import { Actions } from 'types';
+
+function* signInSaga(action: Actions): any {
   try {
-    const result = yield call(signIn, action.email, action.password);
+    const result = yield call(signIn, action.email || '', action.password || '');
     const data = result.data.data;
     if (data.token) {
       localStorage.setItem('token', data.token);
@@ -24,9 +26,14 @@ function* signInSaga(action: any): any {
   }
 }
 
-function* signUpSaga(action: any): any {
+function* signUpSaga(action: Actions): any {
   try {
-    const result = yield call(signUp, action.name, action.email, action.password);
+    const result = yield call(
+      signUp,
+      action.name || '',
+      action.email || '',
+      action.password || ''
+    );
     yield put(signUpFinish(result.data.message));
     yield delay(2500);
     history.push('/sign-in/');

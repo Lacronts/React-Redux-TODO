@@ -1,34 +1,31 @@
 import {
-  ADD_ITEM_FAIL,
-  ADD_ITEM_FINISH,
-  ADD_ITEM_START,
+  DELETE_ITEM_FAIL,
+  DELETE_ITEM_FINISH,
+  DELETE_ITEM_START,
   CLEAR_ALERTS,
 } from '../../actionTypes';
+import { Actions, DeletingProcess } from 'types';
 
-import { Actions, AddingProcess } from 'types';
-
-const inititalState: AddingProcess = {
+const initialState: DeletingProcess = {
   inProcess: false,
   error: null,
 };
 
-export const addingProcess = (state = inititalState, action: Actions): AddingProcess => {
+export const deletingProcess = (state = initialState, action: Actions) => {
   switch (action.type) {
-    case ADD_ITEM_START:
+    case DELETE_ITEM_START:
       return {
         ...state,
         inProcess: true,
         error: null,
       };
-
-    case ADD_ITEM_FAIL:
+    case DELETE_ITEM_FAIL:
       return {
         ...state,
         inProcess: false,
         error: action.error || null,
       };
-
-    case ADD_ITEM_FINISH:
+    case DELETE_ITEM_FINISH:
       return {
         ...state,
         inProcess: false,

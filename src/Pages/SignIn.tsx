@@ -105,7 +105,9 @@ const SignInComponent = ({ classes, signInProcess, signInStart }: Props) => {
             error={!!signInProcess.error}
           />
           <Typography color='error' align='center'>
-            {signInProcess.error}
+            {signInProcess.error &&
+              signInProcess.error.details &&
+              signInProcess.error.details.authenticate}
           </Typography>
           <div className={classes.wrapper}>
             <Button

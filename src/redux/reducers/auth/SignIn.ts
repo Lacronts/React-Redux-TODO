@@ -5,24 +5,26 @@ import {
   CLEAR_ALERTS,
 } from '../../actionTypes';
 
-const initialState = {
+import { SignInProcess, Actions } from 'types';
+
+const initialState: SignInProcess = {
   inProcess: false,
-  error: '',
+  error: null,
 };
 
-export const signInProcess = (state = initialState, action: any) => {
+export const signInProcess = (state = initialState, action: Actions): SignInProcess => {
   switch (action.type) {
     case SIGN_IN_START:
       return {
         ...state,
         inProcess: true,
-        error: '',
+        error: null,
       };
     case SIGN_IN_FAIL:
       return {
         ...state,
         inProcess: false,
-        error: action.error,
+        error: action.error || null,
       };
     case SIGN_IN_FINISH: {
       return {
@@ -33,7 +35,7 @@ export const signInProcess = (state = initialState, action: any) => {
     case CLEAR_ALERTS: {
       return {
         ...state,
-        error: '',
+        error: null,
       };
     }
     default:
