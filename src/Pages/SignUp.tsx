@@ -94,8 +94,8 @@ const SignUpComponent = ({ classes, signUpStart, signUpProcess }: Props) => {
             autoComplete='firstName'
             value={formData.name}
             onChange={handleChangeInput}
-            error={!!errors.name}
-            helperText={errors.name}
+            error={errors && Boolean(errors.name)}
+            helperText={errors && errors.name}
           />
 
           <TextField
@@ -108,8 +108,8 @@ const SignUpComponent = ({ classes, signUpStart, signUpProcess }: Props) => {
             autoComplete='email'
             value={formData.email}
             onChange={handleChangeInput}
-            error={!!errors.email}
-            helperText={errors.email}
+            error={errors && Boolean(errors.email)}
+            helperText={errors && errors.email}
           />
 
           <TextField
@@ -123,8 +123,8 @@ const SignUpComponent = ({ classes, signUpStart, signUpProcess }: Props) => {
             autoComplete='current-password'
             value={formData.password}
             onChange={handleChangeInput}
-            error={!!errors.password}
-            helperText={errors.password}
+            error={errors && Boolean(errors.password)}
+            helperText={errors && errors.password}
           />
           <Typography className={classes.message} align='center'>
             {signUpProcess.message}
