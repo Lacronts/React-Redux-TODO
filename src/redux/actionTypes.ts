@@ -6,8 +6,6 @@ export const SIGN_UP_START = 'SIGN_UP_START';
 export const SIGN_UP_FAIL = 'SIGN_UP_FAIL';
 export const SIGN_UP_FINISH = 'SIGN_UP_FINISH';
 
-export const CLEAR_ALERTS = 'CLEAR_ALERTS';
-
 export const ADD_ITEM_START = 'ADD_ITEM_START';
 export const ADD_ITEM_FINISH = 'ADD_ITEM_FINISH';
 export const ADD_ITEM_FAIL = 'ADD_ITEM_FAIL';
@@ -19,3 +17,9 @@ export const FETCH_ITEM_FINISH = 'FETCH_ITEM_FINISH';
 export const DELETE_ITEM_START = 'DELETE_ITEM_START';
 export const DELETE_ITEM_FAIL = 'DELETE_ITEM_FAIL';
 export const DELETE_ITEM_FINISH = 'DELETE_ITEM_FINISH';
+
+export const EDIT_ITEM_START = 'EDIT_ITEM_START';
+export const EDIT_ITEM_FAIL = 'EDIT_ITEM_FAIL';
+export const EDIT_ITEM_FINISH = 'EDIT_ITEM_FINISH';
+
+export const CLEAR_ALERTS = 'CLEAR_ALERTS';

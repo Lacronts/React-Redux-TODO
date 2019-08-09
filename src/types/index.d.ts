@@ -17,6 +17,7 @@ export interface SignInProcess {
 
 export interface DeletingProcess extends SignInProcess {}
 
+export interface EditingProcess extends SignInProcess {}
 export interface SignUpProcess extends SignInProcess {
   message: string;
 }
@@ -49,6 +50,7 @@ export type TodosState = {
   addingProcess: AddingProcess;
   todoList: TodoList;
   deletingProcess: DeletingProcess;
+  editingProcess: EditingProcess;
 };
 
 type Store = {
@@ -65,5 +67,6 @@ export type Actions = {
   email?: string;
   password?: string;
   name?: string;
-  id?: string;
+  todoId?: string;
+  status?: string;
 };

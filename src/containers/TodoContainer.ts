@@ -5,12 +5,14 @@ import {
   addItemStart,
   fetchTodosStart,
   deleteTodoItemStart,
+  editTodoItemStart,
 } from 'redux/actions/todosActions';
 import { clearAlerts } from 'redux/actions/authActions';
 
 const mapStateToProps = ({ todos }: any) => ({ todos });
 
 const mapDispatchToProps = {
+  editTodoItemStart,
   addItemStart,
   clearAlerts,
   fetchTodosStart,

@@ -13,6 +13,7 @@ type Props = {
   addItemStart(todoText: string): void;
   fetchTodosStart(): void;
   deleteTodoItemStart(id: string): void;
+  editTodoItemStart(todoId: string, todoText: string, status: string): void;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -52,6 +53,9 @@ export const Todo = (props: Props) => {
             todoItem={el}
             key={el.id}
             deleteTodoItemStart={props.deleteTodoItemStart}
+            editTodoItemStart={props.editTodoItemStart}
+            deletingProcess={props.todos.deletingProcess}
+            editingProcess={props.todos.editingProcess}
           />
         ))
       ) : (

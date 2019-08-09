@@ -8,6 +8,10 @@ export function getAllTodos() {
   return getClient().get('/todos/');
 }
 
-export function deleteTodoItem(id: string) {
-  return getClient().delete(`/todos/${id}`);
+export function deleteTodoItem(todoId: string) {
+  return getClient().delete(`/todos/${todoId}`);
+}
+
+export function editTodoItem(todoId: string, todoText: string, status: string) {
+  return getClient().put(`/todos/${todoId}`, { todoText, status });
 }

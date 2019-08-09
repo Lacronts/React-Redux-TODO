@@ -7,9 +7,15 @@ import {
   fetchTodosStart,
   deleteTodoItemFail,
   deleteTodoItemFinish,
+  editTodoItemFinish,
 } from '../actions/todosActions';
-import { addNewTodo, getAllTodos, deleteTodoItem } from 'api/todo';
-import { ADD_ITEM_START, FETCH_ITEM_START, DELETE_ITEM_START } from '../actionTypes';
+import { addNewTodo, getAllTodos, deleteTodoItem, editTodoItem } from 'api/todo';
+import {
+  ADD_ITEM_START,
+  FETCH_ITEM_START,
+  DELETE_ITEM_START,
+  EDIT_ITEM_START,
+} from '../actionTypes';
 
 import { Actions } from 'types';
 
@@ -26,19 +32,29 @@ function* tryAddTodo({ todoText }: Actions) {
 function* tryGetTodos(): any {
   try {
     const items = yield call(getAllTodos);
-    yield put(fetchTodosFinish(items.data.data.todos));
+    yield put(fetchTodosFinish(items.data.data));
   } catch (e) {
     yield put(fetchTodosFail(e.response.data.error));
   }
 }
 
-function* tryDeleteTodo({ id }: Actions): any {
+function* tryDeleteTodo({ todoId }: Actions): any {
   try {
-    yield call(deleteTodoItem, id || '');
+    yield call(deleteTodoItem, todoId || '');
     yield put(fetchTodosStart());
     yield put(deleteTodoItemFinish());
   } catch (e) {
     yield put(deleteTodoItemFail(e.response.data.error));
+  }
+}
+
+function* tryEditTodo({ todoId, todoText, status }: Actions): any {
+  try {
+    yield call(editTodoItem, todoId || '', todoText || '', status || '');
+    yield put(fetchTodosStart());
+    yield put(editTodoItemFinish());
+  } catch (e) {
+    console.log(e.response.data);
   }
 }
 
@@ -47,5 +63,6 @@ export function* todoWatcher() {
     takeEvery(ADD_ITEM_START, tryAddTodo),
     takeEvery(FETCH_ITEM_START, tryGetTodos),
     takeEvery(DELETE_ITEM_START, tryDeleteTodo),
+    takeEvery(EDIT_ITEM_START, tryEditTodo),
   ]);
 }

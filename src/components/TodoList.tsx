@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: 'auto',
       padding: theme.spacing(2),
       marginTop: theme.spacing(1),
-      boxShadow: '0 0 0 20px rgba(0,0,0,0)',
+      boxShadow: '0 0 0 10px rgba(0,0,0,0)',
       animation: `$pulsate 1000ms infinite`,
     },
     errorPaper: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
         boxShadow: '0 0 0 0  rgba(0, 0, 0, 0.2)',
       },
       '100%': {
-        transform: 'box-shadow: 0 0 0 20px rgba(0, 0, 0, 0)',
+        transform: 'box-shadow: 0 0 0 10px rgba(0, 0, 0, 0)',
       },
     },
   })

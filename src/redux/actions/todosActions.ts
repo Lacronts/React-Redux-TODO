@@ -8,6 +8,9 @@ import {
   DELETE_ITEM_FAIL,
   DELETE_ITEM_FINISH,
   DELETE_ITEM_START,
+  EDIT_ITEM_FAIL,
+  EDIT_ITEM_FINISH,
+  EDIT_ITEM_START,
 } from '../actionTypes';
 
 import { Errors, TodoItemType } from 'types';
@@ -40,9 +43,9 @@ export const fetchTodosFinish = (data: TodoItemType[]) => ({
   data,
 });
 
-export const deleteTodoItemStart = (id: string) => ({
+export const deleteTodoItemStart = (todoId: string) => ({
   type: DELETE_ITEM_START,
-  id,
+  todoId,
 });
 
 export const deleteTodoItemFail = (error: Errors) => ({
@@ -52,4 +55,20 @@ export const deleteTodoItemFail = (error: Errors) => ({
 
 export const deleteTodoItemFinish = () => ({
   type: DELETE_ITEM_FINISH,
+});
+
+export const editTodoItemStart = (todoId: string, todoText: string, status: string) => ({
+  type: EDIT_ITEM_START,
+  todoId,
+  todoText,
+  status,
+});
+
+export const editTodoItemFail = (error: Errors) => ({
+  type: EDIT_ITEM_FAIL,
+  error,
+});
+
+export const editTodoItemFinish = () => ({
+  type: EDIT_ITEM_FINISH,
 });
