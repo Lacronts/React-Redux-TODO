@@ -8,19 +8,19 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/React-Redux-TODO/',
   },
   devServer: {
     historyApiFallback: true,
     overlay: true,
-    port: 3000
+    port: 3000,
   },
   module: {
     rules: [
       {
         test: /\.(ts|tsx)?$/,
         loader: 'ts-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
         // options: {
         //   transpileOnly: true,
         // },
@@ -31,23 +31,23 @@ const config = {
           {
             loader: 'style-loader',
             options: {
-              sourceMap: isDevelopment
-            }
+              sourceMap: isDevelopment,
+            },
           },
           {
             loader: 'css-loader',
             options: {
-              sourceMap: isDevelopment
-            }
+              sourceMap: isDevelopment,
+            },
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: isDevelopment
-            }
-          }
-        ]
-      }
+              sourceMap: isDevelopment,
+            },
+          },
+        ],
+      },
       // {
       //   test: /\.(ttf|eot|svg|woff|woff2)(\?.+)?$/,
       //   use: [
@@ -73,19 +73,19 @@ const config = {
       //     }
       //   ]
       // }
-    ]
+    ],
   },
   plugins: [
     new HTMLWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',
-      favicon: './public/favicon.ico'
-    })
+      favicon: './public/favicon.ico',
+    }),
   ],
   resolve: {
     modules: [path.resolve(__dirname, './src'), 'node_modules'],
-    extensions: ['.tsx', '.ts', '.js']
-  }
+    extensions: ['.tsx', '.ts', '.js'],
+  },
 };
 
 module.exports = config;
